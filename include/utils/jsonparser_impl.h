@@ -1,5 +1,5 @@
-// Author: Gastón Rial
-// Date: 2019-06-12
+/// author Gastón Rial
+/// date 2019-06-12
 
 #ifndef SIMPLEJSONPARSER_INCLUDE_UTILS_JSON_PARSER_IMPL_H_
 #define SIMPLEJSONPARSER_INCLUDE_UTILS_JSON_PARSER_IMPL_H_
@@ -7,6 +7,26 @@
 #include "jsonparser.h"
 
 using namespace jsonparser;
+
+static const size_t npos = -1;
+
+static inline void getKey(const string& sIn, string& sKey)
+{
+
+    int start = sIn.find_first_of('\"');
+    int end = sIn.find_last_of('\"');
+    sKey = sIn.substr(start+1,end-start-1);
+
+}
+
+static inline void getValue(const string& sIn, string& sValue)
+{
+
+    int start = sIn.find_first_not_of(' ');
+    int end = sIn.find_last_not_of(' ');
+    sValue = sIn.substr(start,end-start+1);
+
+}
 
 static inline void splitString(const string& str, vector<string>& output, char delim = ' ')
 {
@@ -16,8 +36,6 @@ static inline void splitString(const string& str, vector<string>& output, char d
         output.push_back(token);
     }
 }
-
-static const size_t npos = -1;
 
 template <typename V>
 JsonValue<V>::JsonValue(V& oValue, ValueType oType)
@@ -555,7 +573,6 @@ static inline void addArrayValue (const string& sKey, const string& sValues, Jso
             element = (*sIter).substr(1,(*sIter).length()-1);
         else
             element = *sIter;
-        
 
         if( typeid(V) == typeid(string))
         {
@@ -650,7 +667,7 @@ void jsonparser::encodeSimpleJson(const string& sJson, Json& oRet)
         if(sIter == oVec.begin())
         {   
             
-            sKey = (*sIter).substr(2, (*sIter).length()-3);
+            getKey((*sIter), sKey);
             continue;
 
         }        
@@ -659,38 +676,44 @@ void jsonparser::encodeSimpleJson(const string& sJson, Json& oRet)
         if( (*sIter).find('[') != npos )
         {
 
-            // get sKey
+            // get sValue
             splitString(*sIter,oVecValueKey,']');
+            string sValue;
+            getValue(oVecValueKey[0], sValue);
 
             // para cada tipo
-            if( oVecValueKey[0].find('\"') != npos )
+            if( sValue.find('\"') != npos )
             {
 
-                addArrayValue<string>(sKey, oVecValueKey[0], oRet);
+                addArrayValue<string>(sKey, sValue, oRet);
 
             }
-            else if( oVecValueKey[0].find('.') != npos )
+            else if( sValue.find('.') != npos )
             {
 
-                addArrayValue<double>(sKey, oVecValueKey[0], oRet);
+                addArrayValue<double>(sKey, sValue, oRet);
 
             }
             else
             {
 
-                addArrayValue<int>(sKey, oVecValueKey[0], oRet);
+                addArrayValue<int>(sKey, sValue, oRet);
             
             }
 
             if( next(sIter) != oVec.end() )
-                sKey = oVecValueKey[1].substr(2,oVecValueKey[1].length()-3);
+                getKey(oVecValueKey[1], sKey);
             
         } else {
 
             splitString(*sIter,oVecValueKey,',');
-            addSimpleValue(sKey, oVecValueKey[0], oRet);
+            string sValue;
+            getValue(oVecValueKey[0], sValue);
+
+            addSimpleValue(sKey, sValue, oRet);
+
             if( next(sIter) != oVec.end() )
-                sKey = oVecValueKey[1].substr(1,oVecValueKey[1].length()-2);
+                getKey(oVecValueKey[1], sKey);
 
         }
 
