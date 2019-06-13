@@ -19,6 +19,9 @@ int main(int argc,char** argv)
     string sJson2 = "{\"City\":\"Colonia\",\"listOne\":[23,18,32],\"listTwo\":[2.3,4.5,7.8],\"double\":417.5}";
     Json oJson;
     Json oJson2;
+    Json oJson3;
+    oJson3 = sJson2;
+    cout << oJson3 << "\n" << endl;
     encodeSimpleJson(sJson,oJson);
     encodeSimpleJson(sJson2,oJson2);    
     cout << oJson << endl;

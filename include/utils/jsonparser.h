@@ -77,6 +77,7 @@ namespace jsonparser
             Json(const string& oKey,const vector<string>& oValue);          ///< constructor
             Json(const string& oKey,const vector<int>& oValue);             ///< constructor
             Json(const string& oKey,const vector<double>& oValue);          ///< constructor
+            Json& operator=(const string& sJson);                           ///< assigment operator
             JsonValue<void*>& operator[](const char* oKey) const;           ///< subscripting operator
             const vector<pair<string,int>>& getKeyList() const;             ///< accessor or getter method
             const vector<JsonValue<void*>*>& getValueList() const;          ///< accessor or getter method

@@ -712,4 +712,11 @@ void jsonparser::saveJson(const Json& oJson,const string& output_file_path)
 
 }
 
+Json& Json::operator=(const string& sJson)
+{
+
+    encodeSimpleJson(sJson, *this);
+
+}
+
 #endif //<SIMPLEJSONPARSER_INCLUDE_UTILS_JSON_PARSER_IMPL_H_
