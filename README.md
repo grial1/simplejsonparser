@@ -1,4 +1,6 @@
 # simplejsonparser
+![Code Quality: Cpp](https://img.shields.io/lgtm/grade/cpp/github/grial1/simplejsonparser.svg?color=yellow&style=flat-square)
+![Total Alerts](https://img.shields.io/lgtm/alerts/github/grial1/simplejsonparser.svg?label=lgtm%20alerts&style=flat-square)
 
 C++ library for parsing simple (non-nested) JSON encoded strings. The code in this repo. is part of the implementation of a light stream processing application to analyze system's logs (some kind of HIDS) that is currently in development.
 
