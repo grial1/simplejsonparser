@@ -1,0 +1,7 @@
+language: c++
+  - os: linux
+  apt:
+    packages:
+      - build-essential
+compiler:
+  - g++-7.4
