@@ -121,15 +121,12 @@ Json::Json(const string& oKey, JsonValue<void*>* oValue)
 
 }
 
-Json::Json(const string& oKey, const JsonValue<void*>& oValue)
-{
+Json::Json(const string& oKey, const JsonValue<void*>& oValue):
+Json(oKey, new JsonValue<void*>(oValue))
+{}
 
-    Json(oKey, new JsonValue<void*>(oValue));
-
-}
-
-
-Json::Json(const string& oKey,const bool& oValue)
+Json::Json(const string& oKey,const bool& oValue):
+Json()
 {
     
     void* pValue = static_cast<void*>(new bool(oValue));
@@ -137,13 +134,15 @@ Json::Json(const string& oKey,const bool& oValue)
 
 }
 
-Json::Json(const string& oKey,const int& oValue)
+Json::Json(const string& oKey,const int& oValue):
+Json()
 {
     void* pValue = static_cast<void*>(new int(oValue));
     Json(oKey, new JsonValue<void*>(pValue,ValueType::JSON_INTEGER));
 }
 
-Json::Json(const string& oKey,const double& oValue)
+Json::Json(const string& oKey,const double& oValue):
+Json()
 {
 
     void* pValue = static_cast<void*>(new double(oValue));
@@ -151,7 +150,8 @@ Json::Json(const string& oKey,const double& oValue)
 
 }
 
-Json::Json(const string& oKey,const string& oValue)
+Json::Json(const string& oKey,const string& oValue):
+Json()
 {
 
     void* pValue = static_cast<void*>(new string(oValue));
@@ -159,7 +159,8 @@ Json::Json(const string& oKey,const string& oValue)
 
 }
 
-Json::Json(const string& oKey,const Json& oValue)
+Json::Json(const string& oKey,const Json& oValue):
+Json()
 {
 
     void* pValue = static_cast<void*>(new Json(oValue));
@@ -167,7 +168,8 @@ Json::Json(const string& oKey,const Json& oValue)
 
 }
 
-Json::Json(const string& oKey,const vector<string>& oValue)
+Json::Json(const string& oKey,const vector<string>& oValue):
+Json()
 {
 
     void* pValue = static_cast<void*>(new vector<string>(oValue));
@@ -175,7 +177,8 @@ Json::Json(const string& oKey,const vector<string>& oValue)
 
 }
 
-Json::Json(const string& oKey,const vector<int>& oValue)
+Json::Json(const string& oKey,const vector<int>& oValue):
+Json()
 {
 
     void* pValue = static_cast<void*>(new vector<int>(oValue));
@@ -183,7 +186,8 @@ Json::Json(const string& oKey,const vector<int>& oValue)
 
 }
 
-Json::Json(const string& oKey,const vector<double>& oValue)
+Json::Json(const string& oKey,const vector<double>& oValue):
+Json()
 {
 
     void* pValue = static_cast<void*>(new vector<double>(oValue));
@@ -201,7 +205,7 @@ JsonValue<void*>& Json::operator[](const char* oKey) const
             return *(this->_oValueList[valueIndex]);
         }    
     
-    throw new runtime_error("Run-Time Error: Key does not belong to json"); // < Run-Time Error: Key does not belong to json
+    throw runtime_error("Run-Time Error: Key does not belong to json"); // < Run-Time Error: Key does not belong to json
 
 }           
 
@@ -313,7 +317,7 @@ string Json::get(const char* oKey) const
     if( oJV != nullptr )
         return to_string(*oJV);
     else
-        throw new runtime_error("Error: El valor es un <Json Object>");
+        throw runtime_error("Error: El valor es un <Json Object>");
 
 }
 
@@ -499,7 +503,7 @@ string jsonparser::to_string(const JsonValue<V>& oJV)
     else
     {
 
-        throw new runtime_error("Error: El valor es indefinido");
+        throw runtime_error("Error: El valor es indefinido");
 
     }
 
@@ -601,7 +605,7 @@ static inline void addArrayValue (const string& sKey, const string& sValues, Jso
         else
         {
         
-            throw new runtime_error("ERROR: type is not recognized");
+            throw runtime_error("ERROR: type is not recognized");
 
         }
     }
@@ -731,11 +735,11 @@ void jsonparser::saveJson(const Json& oJson,const string& output_file_path)
         oFile.close();
     }
     else
-        throw new runtime_error("Error: Could not open file");
+        throw runtime_error("Error: Could not open file");
 
 }
 
-Json& Json::operator=(const string& sJson)
+void Json::operator=(const string& sJson)
 {
 
     encodeSimpleJson(sJson, *this);
