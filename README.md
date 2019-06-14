@@ -4,8 +4,9 @@ C++ library for parsing simple (non-nested) JSON encoded strings. The code in th
 
 ## Requirements
 
-__OS Used in development__: Ubuntu 18.04
-__Additional system information__: Linux 4.18.0-21-generic #22~18.04.1-Ubuntu SMP Thu May 16 15:07:19 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+* __OS Used in development__: Ubuntu 18.04
+
+* __Additional system information__: Linux 4.18.0-21-generic #22~18.04.1-Ubuntu SMP Thu May 16 15:07:19 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
 
 __UNTIL FURTHER NOTICE, TRY IT WITH THE FOLLOWING COMANDS__:
 ```
