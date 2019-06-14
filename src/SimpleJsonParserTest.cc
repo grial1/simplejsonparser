@@ -41,6 +41,29 @@ SCENARIO( "A Json object can be created from a string", "[jsonparser]" ) {
 
         }
 
+        WHEN("adding a list of doubles")
+        {
+
+            vector<double> oListDoubles{1.1,2.2,3.3};
+            oJson.addKey("Key3", oListDoubles);
+
+            THEN("The value list is added")
+            {
+
+                vector<double> oJV = *(static_cast<vector<double>*>(oJson["Key3"].getValue()));
+                int index = 0;
+                for(auto d: oJV)
+                {
+
+                    REQUIRE(  d == oListDoubles[index] );
+                    ++index;
+
+                }
+
+            }
+
+        }
+
     }
 
 
