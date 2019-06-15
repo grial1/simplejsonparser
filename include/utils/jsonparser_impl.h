@@ -746,4 +746,19 @@ void Json::operator=(const string& sJson)
 
 }
 
+Json::operator string() const
+{
+
+    return to_string(*this);
+
+}
+
+template <typename V>
+JsonValue<V>::operator string() const
+{
+
+    return to_string(*this);
+
+}
+
 #endif //<SIMPLEJSONPARSER_INCLUDE_UTILS_JSON_PARSER_IMPL_H_

@@ -21,7 +21,7 @@ SCENARIO( "A Json object can be created from a string", "[jsonparser]" ) {
             {
                 
                 REQUIRE( oJson.get("Key").compare("\"Value\"") == 0 );
-                REQUIRE( sJson.compare(jsonparser::to_string(oJson)) == 0 );
+                REQUIRE( sJson.compare(oJson) == 0 );
 
             }
 
