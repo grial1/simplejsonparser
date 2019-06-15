@@ -1,0 +1,33 @@
+platform:
+  - x64
+  - x86
+
+configuration:
+  - Debug
+  - Release
+
+environment:
+  matrix:
+    - language: cpp
+      libpackager_type: static_library
+    - language: cpp
+      libpackager_type: shared_library
+
+before_build:
+  - sudo apt-get install -y build-essential
+  
+build_script:
+  - make
+
+after_build:
+  - make run
+
+deploy:
+  on:
+    appveyor_repo_tag: true
+    platform: x64
+    configuration: Release
+
+branches:
+  only:
+    - master

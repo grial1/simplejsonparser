@@ -49,6 +49,7 @@ namespace jsonparser
             const V& getValue() const;              ///< accessor or getter method
             void setValue(const V& oValue);         ///< mutator or setter method
             const ValueType& getType() const;       ///< method that returns type
+            operator string() const;                ///< transform operator
 
             ~JsonValue();                           ///< destructor
 
@@ -77,7 +78,7 @@ namespace jsonparser
             Json(const string& oKey,const vector<string>& oValue);          ///< constructor
             Json(const string& oKey,const vector<int>& oValue);             ///< constructor
             Json(const string& oKey,const vector<double>& oValue);          ///< constructor
-            void operator=(const string& sJson);                           ///< assigment operator
+            void operator=(const string& sJson);                            ///< assigment operator
             JsonValue<void*>& operator[](const char* oKey) const;           ///< subscripting operator
             const vector<pair<string,int>>& getKeyList() const;             ///< accessor or getter method
             const vector<JsonValue<void*>*>& getValueList() const;          ///< accessor or getter method
@@ -92,7 +93,8 @@ namespace jsonparser
             void addKey(const string& oKey,const vector<string>& oValue);   ///< method for adding a new key
             void addKey(const string& oKey,const vector<int>& oValue);      ///< method for adding a new key
             void addKey(const string& oKey,const vector<double>& oValue);   ///< method for adding a new key
-            string get(const char* oKey) const;
+            string get(const char* oKey) const;                             ///< method for returning string rep. of JsonValue
+            operator string() const;                                        ///< transform operator
 
             ~Json();                                                        ///< destructor
 
