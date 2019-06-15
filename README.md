@@ -1,5 +1,4 @@
 # simplejsonparser
-![build](https://img.shields.io/travis/grial1/simplejsonparser.svg?style=flat-square)
 ![Code Quality: Cpp](https://img.shields.io/lgtm/grade/cpp/github/grial1/simplejsonparser.svg?color=yellow&style=flat-square)
 ![Total Alerts](https://img.shields.io/lgtm/alerts/github/grial1/simplejsonparser.svg?label=lgtm%20alerts&style=flat-square)
 
